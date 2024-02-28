@@ -5,18 +5,19 @@ import { EditUserDto } from './dto';
 @Injectable()
 export class UserService {
     constructor(
-        private prismaService : PrismaService
-    ){}
+        private prismaService: PrismaService
+    ) { }
 
-    editUser(userId:number , dto:EditUserDto){
+    editUser(userId: number, dto: EditUserDto) {
         const updateUser = this.prismaService.user.update({
-            where:{
-                id:userId
+            where: {
+                id: userId
             },
-            data:{
+            data: {
                 ...dto
             }
         })
+        // @ts-ignore 
         delete updateUser.hash
         return updateUser
     }
